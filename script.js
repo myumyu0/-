@@ -1,5 +1,7 @@
+// --- script.js ---
+
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. 結果の配列を増やす
+    // 1. 結果の配列（タロットカード風）
     const results = [
         { title: "🌟 太陽 (The Sun)", detail: "大吉！最高の一日が訪れます。希望と成功に満ちた一日を過ごせるでしょう。", color: "#ffc107" },
         { title: "🍀 星 (The Star)", detail: "大吉！願いが叶う予感。落ち着いて行動すれば、運が味方します。", color: "#4caf50" },
@@ -12,13 +14,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const cardButtons = document.querySelectorAll('.card-btn');
     const resultDisplay = document.getElementById('result');
-    let hasCardBeenDrawn = false; // 既にカードが引かれたかを判定するフラグ
+    let hasCardBeenDrawn = false; 
 
     // 2. カードボタンにイベントリスナーを設定
     cardButtons.forEach(button => {
+        // カードの裏側デザインとして、テキストを一時的に隠す
+        button.textContent = ""; 
+        
         button.addEventListener('click', function() {
             if (hasCardBeenDrawn) {
-                // 既に引かれている場合は処理しない
                 resultDisplay.textContent = "既に今日の運勢は引かれています。ページをリロードしてください。";
                 return;
             }
@@ -31,6 +35,11 @@ document.addEventListener("DOMContentLoaded", function() {
             const randomIndex = Math.floor(Math.random() * results.length);
             const selectedResult = results[randomIndex];
 
+            // ★改良ポイント: ボタンのテキストを結果のタイトルに変えて、カードの表側を表現
+            this.textContent = selectedResult.title.split('(')[0].trim(); /* タイトル（例: 太陽）のみ表示 */
+            this.style.fontSize = '20px'; // 文字サイズを調整
+            this.style.color = selectedResult.color; // 文字の色を運勢の色に
+
             // 5. 結果を表示
             resultDisplay.innerHTML = 
                 `<span style="color: ${selectedResult.color}; font-size: 24px;">【${selectedResult.title}】</span><br>` +
@@ -38,10 +47,9 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // 6. 他のカードボタンを無効化
             cardButtons.forEach(btn => {
-                if (btn !== this) {
-                    btn.disabled = true;
-                }
+                btn.disabled = true; // 全てのボタンを無効化
             });
         });
     });
+});
 });
