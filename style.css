@@ -1,65 +1,81 @@
-body {
-  text-align: center;
-  font-family: "Hiragino Sans", "Arial", sans-serif;
-  background: linear-gradient(#dfe9f3, #ffffff);
-  padding-top: 50px; /* パディングを少し調整 */
-}
+/* --- style.css --- */
 
-h1 {
-  font-size: 36px;
-  margin-bottom: 30px;
-}
-
-.box {
-  background: white;
-  padding: 40px;
-  width: 500px; /* 幅を広げる */
-  margin: 0 auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.instruction {
-    margin-bottom: 20px;
-    font-size: 16px;
-    color: #555;
-}
+/* ... (省略: body, h1, .box, .instruction のスタイルはそのまま) ... */
 
 #card-container {
-    display: flex; /* カードを横並びにする */
-    justify-content: space-around; /* 均等な間隔で配置 */
+    display: flex;
+    justify-content: space-around;
     margin-bottom: 30px;
 }
 
 .card-btn {
-  padding: 10px 15px;
-  font-size: 16px;
-  border: 2px solid #ff77aa; /* ボタンの枠を明確にする */
-  border-radius: 8px;
+  /* ボタンを四角いカードのデザインに変更 */
+  padding: 0; /* paddingをリセット */
+  width: 80px;  /* 幅を固定 */
+  height: 120px; /* 高さを固定 */
+  font-size: 40px; /* 記号を大きく */
+  line-height: 120px; /* 記号を垂直中央に */
+  
+  border: 4px solid gold; /* 縁取り */
+  border-radius: 10px;
   cursor: pointer;
-  background-color: white;
-  color: #ff77aa;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-
-.card-btn:hover {
-  background-color: #ff77aa;
+  
+  /* カードの裏側デザイン */
+  background-color: #3f004f; /* 濃い紫 */
   color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  
+  transition: all 0.4s ease; /* アニメーションを滑らかに */
+  position: relative;
+  overflow: hidden; /* カード内要素がはみ出さないように */
 }
 
-.card-btn.selected { /* 選択後のカードのスタイル */
-    background-color: #ff77aa;
-    color: white;
-    box-shadow: 0 0 10px rgba(255, 119, 170, 0.7);
+/* ホバー時の効果 */
+.card-btn:hover {
+  transform: translateY(-5px) scale(1.03); /* 少し浮き上がらせる */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+  background-color: #5d1a6c;
+}
+
+/* 選択されたカード（表側）のスタイル */
+.card-btn.selected {
+    /* 選択後は裏側から表側に変わったように見せる */
+    background: linear-gradient(135deg, #f7f7f7, #e0e0e0); /* 明るい背景 */
+    color: #3f004f;
+    border-color: #ff77aa;
     cursor: default;
-    transform: scale(1.05);
+    transform: none; /* 浮き上がりを解除 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
+/* カードの裏側に模様や記号を付ける (例: 星) */
+.card-btn::before {
+    content: "🔮"; /* 裏側の模様の記号 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 120px;
+    font-size: 50px;
+    opacity: 0.7;
+    transition: opacity 0.4s;
+}
+
+/* 選択後のカードは裏側の模様を消す */
+.card-btn.selected::before {
+    content: "";
+    opacity: 0;
+}
+
+
+/* 結果表示の調整 */
 #result {
   margin-top: 20px;
-  font-size: 22px;
-  min-height: 50px; /* 結果エリアの高さを確保 */
+  padding-top: 15px;
+  font-size: 20px;
+  min-height: 50px;
   font-weight: bold;
   color: #333;
+  border-top: 1px solid #eee;
 }
