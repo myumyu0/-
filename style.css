@@ -2,39 +2,64 @@ body {
   text-align: center;
   font-family: "Hiragino Sans", "Arial", sans-serif;
   background: linear-gradient(#dfe9f3, #ffffff);
-  padding-top: 100px;
+  padding-top: 50px; /* パディングを少し調整 */
 }
 
 h1 {
   font-size: 36px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .box {
   background: white;
   padding: 40px;
-  width: 300px;
+  width: 500px; /* 幅を広げる */
   margin: 0 auto;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-button {
-  padding: 10px 25px;
-  font-size: 20px;
-  border: none;
+.instruction {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+#card-container {
+    display: flex; /* カードを横並びにする */
+    justify-content: space-around; /* 均等な間隔で配置 */
+    margin-bottom: 30px;
+}
+
+.card-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ff77aa; /* ボタンの枠を明確にする */
   border-radius: 8px;
   cursor: pointer;
+  background-color: white;
+  color: #ff77aa;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.card-btn:hover {
   background-color: #ff77aa;
   color: white;
 }
 
-button:hover {
-  opacity: 0.9;
+.card-btn.selected { /* 選択後のカードのスタイル */
+    background-color: #ff77aa;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 119, 170, 0.7);
+    cursor: default;
+    transform: scale(1.05);
 }
 
 #result {
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 22px;
+  min-height: 50px; /* 結果エリアの高さを確保 */
   font-weight: bold;
+  color: #333;
 }
