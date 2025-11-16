@@ -52,4 +52,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-});
+// 修正完了。余分な閉じ括弧を削除しました。
